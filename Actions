@@ -1,0 +1,45 @@
+Private Sub cmdReset_Click()
+ Dim msgValue As VbMsgBoxResult
+    
+    msgValue = MsgBox("Do you want to reset the form?", vbYesNo + vbInformation, "Confirmation")
+    
+    If msgValue = vbNo Then Exit Sub
+    
+Call Reset
+End Sub
+
+Private Sub cmdSave_Click()
+    Dim msgValue As VbMsgBoxResult
+    
+    msgValue = MsgBox("Do you want to save the data?", vbYesNo + vbInformation, "Confirmation")
+    
+    If msgValue = vbNo Then Exit Sub
+    
+Call Submit
+End Sub
+
+Private Sub UserForm_Initialize()
+
+With cmbType
+    .AddItem ("Select the repair type")
+    .AddItem ("Repair-Field")
+    .AddItem ("Repair-Warranty")
+    .AddItem ("Repair-Damage")
+    .AddItem ("Operations")
+    .AddItem ("Repair-GPS")
+    .AddItem ("PM")
+    .ListIndex = 0
+End With
+
+With cmbPriority
+    .AddItem ("Select the priority level")
+    .AddItem ("Low")
+    .AddItem ("Medium")
+    .AddItem ("High")
+    .ListIndex = 0
+End With
+    
+
+
+
+End Sub
