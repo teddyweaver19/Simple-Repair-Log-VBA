@@ -1,0 +1,65 @@
+Sub Submit()
+    Dim sh As Worksheet
+    Dim iRow As Long
+    
+    
+    On Error Resume Next
+    Set sh = ThisWorkbook.Sheets("Sheet1")
+    On Error GoTo 0
+    
+    ' Check if the worksheet reference is valid
+    If sh Is Nothing Then
+        MsgBox "Worksheet 'Sheet1' not found!", vbExclamation
+        Exit Sub
+    End If
+    
+    
+    iRow = [Counta(Sheet1!A:A)] + 1 'Finds next available row to write to
+    
+   
+    If iRow < 1 Then
+        MsgBox "No available row to write to!", vbExclamation
+        Exit Sub
+    End If
+    
+ 
+    
+
+    With sh
+        .Cells(iRow, 1).Value = UserForm1.txtEquipment.Value
+        .Cells(iRow, 2).Value = UserForm1.txtIssue.Value
+        .Cells(iRow, 3).Value = UserForm1.cmbType.Value
+        .Cells(iRow, 4).Value = UserForm1.cmbPriority.Value
+        .Cells(iRow, 5).Value = Date & " " & Time
+        .Cells(iRow, 7).Value = UserForm1.txtTech.Value
+        .Cells(iRow, 8).Value = UserForm1.txtCall.Value
+        .Cells(iRow, 9).Value = UserForm1.txtNotes.Value
+        .Cells(iRow, 10).Value = UserForm1.txtHours.Value
+    
+        
+    End With
+End Sub
+
+Sub Reset()
+    Dim iRow As Long
+    iRow = WorksheetFunction.CountA(Sheets("Sheet1").Range("A:A"))
+    
+    With UserForm1
+       .txtEquipment = ""
+       .cmbType.ListIndex = 0 'Returns to default
+       .txtIssue = ""
+       .cmbPriority.ListIndex = 0 'Returns to default
+       .txtTech = ""
+       .txtCall = ""
+       .txtNotes = ""
+       .txtHours = ""
+    End With
+End Sub
+
+Sub Show_Form()
+    UserForm1.Show
+End Sub
+
+Function Timestamp() As Date 'static timestamp function
+    Timestamp = Now()
+End Function
